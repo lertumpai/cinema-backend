@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { UserModule } from "./user/user.module";
-import { ArticleModule } from "./article/article.module";
+import { UserModule } from "./domains/user/user.module";
 
 @Module({
   imports: [
@@ -11,8 +11,16 @@ import { ArticleModule } from "./article/article.module";
       autoSchemaFile: 'schema.gql',
       debug: false,
     }),
+    // TypeOrmModule.forRoot({
+    //   type: 'postgres',
+    //   host: 'localhost',
+    //   port: 8000,
+    //   username: 'postgres',
+    //   password: 'password',
+    //   database: 'test',
+    //   entities: [],
+    // }),
     UserModule,
-    ArticleModule,
   ],
 })
 export class AppModule {}
