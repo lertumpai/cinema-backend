@@ -5,4 +5,4 @@ import { UserResolver } from './user.resolver';
   providers: [UserResolver],
 })
 
-export class UserModule {}
+export default class UserModule {}

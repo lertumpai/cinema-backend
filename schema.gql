@@ -7,12 +7,10 @@ type User {
   name: String
 }
 
-type Article {
-  id: ID!
-  content: String
-}
-
 type Query {
   getUser: User!
-  getArticle: Article!
+}
+
+type Mutation {
+  createUser: User!
 }
