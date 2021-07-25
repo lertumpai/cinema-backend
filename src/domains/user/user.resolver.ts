@@ -20,8 +20,12 @@ export class UserResolver {
   @Mutation(returns => User)
   async createUser(): Promise<User> {
     const user = UserEntity.create({
+      username: `${Math.random()}`,
+      password: 'password',
       firstName: 'firstName',
       lastName: 'lastName',
+      createdAt: new Date(),
+      updatedAt: new Date(),
     })
     await user.save()
     console.log(user)

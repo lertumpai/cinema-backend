@@ -19,7 +19,7 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "db:migration": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:run",
+    "db:migration": "yarn build && ts-node --transpile-only ./node_modules/typeorm/cli.js migration:run",
     "db:migration:revert": "ts-node --transpile-only ./node_modules/typeorm/cli.js migration:revert"
   },
   "dependencies": {
@@ -30,6 +30,7 @@
     "@nestjs/platform-express": "^8.0.0",
     "@nestjs/typeorm": "^8.0.1",
     "apollo-server-express": "^2",
+    "class-validator": "^0.13.1",
     "graphql": "^15.5.1",
     "graphql-tools": "^7.0.5",
     "pg": "^8.6.0",

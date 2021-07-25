@@ -1,16 +1,20 @@
 import {
   Entity,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   Column,
   BaseEntity,
-  CreateDateColumn,
-  UpdateDateColumn,
 } from "typeorm";
 
 @Entity({ name: 'Users' })
 export class UserEntity extends BaseEntity {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   id: string;
+
+  @Column()
+  username: string;
+
+  @Column()
+  password: string;
 
   @Column({ nullable: true })
   firstName: string;
@@ -18,12 +22,9 @@ export class UserEntity extends BaseEntity {
   @Column({ nullable: true })
   lastName: string;
 
-  @Column({ nullable: true })
-  age: number;
-
-  @CreateDateColumn()
+  @Column()
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @Column()
   updatedAt: Date;
 }
