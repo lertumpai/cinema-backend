@@ -3,9 +3,11 @@ import {
   PrimaryGeneratedColumn,
   Column,
   BaseEntity,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from "typeorm";
 
-@Entity({ name: 'User' })
+@Entity({ name: 'Users' })
 export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -19,4 +21,9 @@ export class UserEntity extends BaseEntity {
   @Column({ nullable: true })
   age: number;
 
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

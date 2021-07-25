@@ -4,7 +4,7 @@ import {
   Mutation,
 } from '@nestjs/graphql';
 
-import { UserEntity } from "../../databases/postgres/models/user.entity";
+import { UserEntity } from "../../databases/postgres/entities/user.entity";
 import { User } from "./user.model";
 
 @Resolver()
