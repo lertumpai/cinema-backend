@@ -1,9 +1,6 @@
-import {
-  Resolver,
-  Query,
-  Mutation,
-} from '@nestjs/graphql';
+import { Mutation, Query, Resolver } from '@nestjs/graphql';
 
+import { Roles } from '../../databases/postgres/entities/enum/index.enum';
 import { UserEntity } from "../../databases/postgres/entities/user.entity";
 import { User } from "./user.model";
 
@@ -24,6 +21,7 @@ export class UserResolver {
       password: 'password',
       firstName: 'firstName',
       lastName: 'lastName',
+      role: Roles.Customer,
       createdAt: new Date(),
       updatedAt: new Date(),
     })

@@ -3,7 +3,9 @@ import {
   PrimaryColumn,
   Column,
   BaseEntity,
-} from "typeorm";
+} from 'typeorm';
+
+import { Roles } from './enum/index.enum';
 
 @Entity({ name: 'Users' })
 export class UserEntity extends BaseEntity {
@@ -15,6 +17,9 @@ export class UserEntity extends BaseEntity {
 
   @Column()
   password: string;
+
+  @Column('text')
+  role: Roles;
 
   @Column({ nullable: true })
   firstName: string;
