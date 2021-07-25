@@ -3,33 +3,33 @@ import {
   PrimaryColumn,
   Column,
   BaseEntity,
-} from 'typeorm';
+} from 'typeorm'
 
-import { Roles } from './enum/index.enum';
+import { Roles } from './enum/index.enum'
 
 @Entity({ name: 'Users' })
 export class UserEntity extends BaseEntity {
   @PrimaryColumn()
-  id: string;
+  id: string
 
   @Column()
-  username: string;
+  username: string
 
   @Column()
-  password: string;
+  password: string
 
   @Column('text')
-  role: Roles;
+  role: Roles
 
   @Column({ nullable: true })
-  firstName: string;
+  firstName: string
 
   @Column({ nullable: true })
-  lastName: string;
+  lastName: string
 
   @Column()
-  createdAt: Date;
+  createdAt: Date
 
   @Column()
-  updatedAt: Date;
+  updatedAt: Date
 }

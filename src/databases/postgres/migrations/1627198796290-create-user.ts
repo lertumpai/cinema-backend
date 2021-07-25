@@ -1,6 +1,6 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { MigrationInterface, QueryRunner, Table } from 'typeorm'
 
-import { Roles } from '../entities/enum/index.enum';
+import { Roles } from '../entities/enum/index.enum'
 
 export class createUser1627198796290 implements MigrationInterface {
 
@@ -30,6 +30,7 @@ export class createUser1627198796290 implements MigrationInterface {
             Roles.Admin,
             Roles.Customer,
           ],
+          default: Roles.Customer,
         },
         {
           name: 'firstName',
@@ -56,7 +57,7 @@ export class createUser1627198796290 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('Users');
+    await queryRunner.dropTable('Users')
   }
 
 }

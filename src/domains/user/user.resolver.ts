@@ -1,36 +1,33 @@
-import { Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Mutation, Query, Resolver } from '@nestjs/graphql'
 
-import { Roles } from '../../databases/postgres/entities/enum/index.enum';
-import { UserEntity } from "../../databases/postgres/entities/user.entity";
-import { User } from "./user.model";
+import { UserService } from './user.service'
+import { UserModel } from './user.model'
+
+const mockUser = {
+  id: '123',
+  username: 'username',
+  password: 'password',
+  role: 'Customer',
+  createdAt: new Date(),
+  updatedAt: new Date(),
+}
 
 @Resolver()
 export class UserResolver {
-  @Query(returns => User)
-  getUser(): User {
-    return {
-      id: '123',
-      name: 'Name',
-    }
+  constructor(
+    private userService: UserService
+  ) {}
+
+
+  @Query(returns => UserModel)
+  getUser(): UserModel {
+    return mockUser
   }
 
-  @Mutation(returns => User)
-  async createUser(): Promise<User> {
-    const user = UserEntity.create({
-      username: `${Math.random()}`,
-      password: 'password',
-      firstName: 'firstName',
-      lastName: 'lastName',
-      role: Roles.Customer,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    })
-    await user.save()
-    console.log(user)
-
-    return {
-      id: '123',
-      name: 'Name',
-    }
+  @Mutation(returns => UserModel)
+  async register(): Promise<UserModel> {
+    const createdUser = await this.userService.create({ username: `${Math.random()}`, password: 'password' })
+    console.log(createdUser)
+    return mockUser
   }
 }
