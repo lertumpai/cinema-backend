@@ -9,19 +9,19 @@ import { AuthRegisterArgs, AuthArgs } from './auth.dto'
 @Injectable()
 export class AuthService {
   constructor(
-    private authenticationRepository: AuthRepository
+    private authRepository: AuthRepository
   ) {}
 
   async register(authRegisterArgs: AuthRegisterArgs): Promise<AuthEntity> {
     const { username, password, role } = authRegisterArgs
-    const createdUser = await this.authenticationRepository.findOneByUsername(username)
+    const createdUser = await this.authRepository.findOneByUsername(username)
 
     if (createdUser) {
       throw new DuplicationErrorException('Username', username)
     }
 
     const hashPassword = bcrypt.hashSync(password, 10)
-    return this.authenticationRepository.create({
+    return this.authRepository.create({
       username,
       password: hashPassword,
       role,

@@ -9,12 +9,12 @@ import { AuthRegisterArgs } from './auth.dto'
 export class AuthRepository {
   constructor(
     @InjectRepository(AuthEntity)
-    private authenticationEntity: Repository<AuthEntity>,
+    private authEntity: Repository<AuthEntity>,
   ) {}
 
   async create(authRegisterArgs: AuthRegisterArgs): Promise<AuthEntity> {
     const date = new Date()
-    const user = this.authenticationEntity.create({
+    const user = this.authEntity.create({
       ...authRegisterArgs,
       createdAt: date,
       updatedAt: date,
@@ -23,10 +23,10 @@ export class AuthRepository {
   }
 
   findOneById(id: string): Promise<AuthEntity> {
-    return this.authenticationEntity.findOne({ where: { id } })
+    return this.authEntity.findOne({ where: { id } })
   }
 
   findOneByUsername(username: string): Promise<AuthEntity> {
-    return this.authenticationEntity.findOne({ where: { username } })
+    return this.authEntity.findOne({ where: { username } })
   }
 }
