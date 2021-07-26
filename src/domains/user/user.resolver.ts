@@ -26,8 +26,6 @@ export class UserResolver {
 
   @Mutation(returns => UserModel)
   async register(): Promise<UserModel> {
-    const createdUser = await this.userService.create({ username: `${Math.random()}`, password: 'password' })
-    console.log(createdUser)
     return mockUser
   }
 }

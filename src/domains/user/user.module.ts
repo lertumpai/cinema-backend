@@ -7,7 +7,7 @@ import { UserService } from './user.service'
 import { UserEntity } from '../../databases/postgres/entities/user.entity'
 
 @Module({
-  imports:[
+  imports: [
     TypeOrmModule.forFeature([
       UserEntity,
     ]),
@@ -16,9 +16,6 @@ import { UserEntity } from '../../databases/postgres/entities/user.entity'
     UserResolver,
     UserRepository,
     UserService,
-  ],
-  exports: [
-    UserRepository,
   ],
 })
 export class UserModule {}

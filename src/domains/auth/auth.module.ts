@@ -1,12 +1,20 @@
 import { Module } from '@nestjs/common'
+import { TypeOrmModule } from '@nestjs/typeorm';
 
+import { AuthResolver } from './auth.resolver'
+import { AuthRepository } from './auth.repository'
 import { AuthService } from './auth.service'
+import { AuthEntity } from '../../databases/postgres/entities/auth.entity'
 
 @Module({
-  providers: [
-    AuthService,
+  imports: [
+    TypeOrmModule.forFeature([
+      AuthEntity,
+    ]),
   ],
-  exports:[
+  providers: [
+    AuthResolver,
+    AuthRepository,
     AuthService,
   ],
 })

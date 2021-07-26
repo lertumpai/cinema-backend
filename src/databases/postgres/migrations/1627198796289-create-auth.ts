@@ -1,10 +1,12 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm'
 
-export class createUser1627198796290 implements MigrationInterface {
+import { Roles } from '../entities/enum/index.enum'
+
+export class createAuth1627198796289 implements MigrationInterface {
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(new Table({
-      name: 'Users',
+      name: 'Auths',
       columns: [
         {
           name: 'id',
@@ -13,14 +15,22 @@ export class createUser1627198796290 implements MigrationInterface {
           default: 'uuid_generate_v4()',
         },
         {
-          name: 'firstName',
+          name: 'username',
           type: 'varchar',
-          isNullable: true,
+          isUnique: true,
         },
         {
-          name: 'lastName',
+          name: 'password',
           type: 'varchar',
-          isNullable: true,
+        },
+        {
+          name: 'role',
+          type: 'enum',
+          enum: [
+            Roles.Admin,
+            Roles.Customer,
+          ],
+          default: Roles.Customer,
         },
         {
           name: 'createdAt',
@@ -37,7 +47,7 @@ export class createUser1627198796290 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('Users')
+    await queryRunner.dropTable('Auths')
   }
 
 }
