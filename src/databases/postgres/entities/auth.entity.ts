@@ -1,6 +1,6 @@
 import {
   Entity,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   Column,
   BaseEntity,
 } from 'typeorm'
@@ -9,7 +9,7 @@ import { Roles } from './enum/index.enum'
 
 @Entity({ name: 'Auths' })
 export class AuthEntity extends BaseEntity {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
   id: string
 
   @Column()

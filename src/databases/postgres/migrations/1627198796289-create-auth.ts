@@ -30,7 +30,6 @@ export class createAuth1627198796289 implements MigrationInterface {
             Roles.Admin,
             Roles.Customer,
           ],
-          default: Roles.Customer,
         },
         {
           name: 'createdAt',

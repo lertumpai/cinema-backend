@@ -1,16 +1,8 @@
-import { Mutation, Query, Resolver } from '@nestjs/graphql'
+import { Mutation, Resolver, Args } from '@nestjs/graphql'
 
+import { AuthArgs } from './auth.dto'
 import { AuthService } from './auth.service'
-import { AuthModel } from './auth.model'
-
-const mockAuth = {
-  id: '123',
-  username: 'username',
-  password: 'password',
-  role: 'Customer',
-  createdAt: new Date(),
-  updatedAt: new Date(),
-}
+import { AuthModel } from './auth.dto'
 
 @Resolver()
 export class AuthResolver {
@@ -18,16 +10,8 @@ export class AuthResolver {
     private authService: AuthService
   ) {}
 
-
-  @Query(returns => AuthModel)
-  getUser(): AuthModel {
-    return mockAuth
-  }
-
   @Mutation(returns => AuthModel)
-  async register(): Promise<AuthModel> {
-    const createdUser = await this.authService.register({ username: `${Math.random()}`, password: 'password' })
-    console.log(createdUser)
-    return mockAuth
+  register(@Args() authArgs: AuthArgs): Promise<AuthModel> {
+    return this.authService.register(authArgs)
   }
 }

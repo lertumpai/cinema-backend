@@ -2,15 +2,36 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type User {
+type UserModel {
   id: ID!
-  name: String
+  firstName: String
+  lastName: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type AuthModel {
+  id: ID!
+  username: String!
+  role: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type Query {
-  getUser: User!
+  getUser: AuthModel!
 }
 
 type Mutation {
-  createUser: User!
+  register(username: String!, password: String!, role: Roles = Customer): AuthModel!
+}
+
+enum Roles {
+  Customer
+  Admin
 }

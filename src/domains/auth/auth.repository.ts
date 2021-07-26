@@ -19,8 +19,7 @@ export class AuthRepository {
       createdAt: date,
       updatedAt: date,
     })
-    await user.save()
-    return user
+    return user.save()
   }
 
   findOneById(id: string): Promise<AuthEntity> {

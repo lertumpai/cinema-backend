@@ -1,7 +1,7 @@
 import { Mutation, Query, Resolver } from '@nestjs/graphql'
 
 import { UserService } from './user.service'
-import { UserModel } from './user.model'
+import { UserModel } from './user.dto'
 
 const mockUser = {
   id: '123',
