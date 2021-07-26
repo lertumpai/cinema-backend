@@ -4,7 +4,7 @@ import * as bcrypt from 'bcrypt'
 import { AuthEntity } from '../../databases/postgres/entities/auth.entity'
 import { AuthRepository } from './auth.repository'
 import { DuplicationErrorException } from '../../errors/duplicationError.exception'
-import { AuthArgs } from './auth.dto'
+import { AuthRegisterArgs, AuthArgs } from './auth.dto'
 
 @Injectable()
 export class AuthService {
@@ -12,8 +12,8 @@ export class AuthService {
     private authenticationRepository: AuthRepository
   ) {}
 
-  async register(authArgs: AuthArgs): Promise<AuthEntity> {
-    const { username, password, role } = authArgs
+  async register(authRegisterArgs: AuthRegisterArgs): Promise<AuthEntity> {
+    const { username, password, role } = authRegisterArgs
     const createdUser = await this.authenticationRepository.findOneByUsername(username)
 
     if (createdUser) {
@@ -28,7 +28,8 @@ export class AuthService {
     })
   }
 
-  async validateUser(userArgs: AuthArgs): Promise<any> {
+  async login(authArgs: AuthArgs): Promise<any> {
+    const { username, password } = authArgs
     return null
   }
 }

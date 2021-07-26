@@ -37,7 +37,10 @@ export class AuthArgs {
 
   @Field()
   password: string
+}
 
+@ArgsType()
+export class AuthRegisterArgs extends AuthArgs{
   @Field(type => Roles, { defaultValue: Roles.Customer, nullable: true })
   @IsEnum(Roles)
   role?: Roles

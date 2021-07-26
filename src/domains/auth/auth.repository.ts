@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 
 import { AuthEntity } from '../../databases/postgres/entities/auth.entity'
-import { AuthArgs } from './auth.dto'
+import { AuthRegisterArgs } from './auth.dto'
 
 @Injectable()
 export class AuthRepository {
@@ -12,10 +12,10 @@ export class AuthRepository {
     private authenticationEntity: Repository<AuthEntity>,
   ) {}
 
-  async create(authArgs: AuthArgs): Promise<AuthEntity> {
+  async create(authRegisterArgs: AuthRegisterArgs): Promise<AuthEntity> {
     const date = new Date()
     const user = this.authenticationEntity.create({
-      ...authArgs,
+      ...authRegisterArgs,
       createdAt: date,
       updatedAt: date,
     })

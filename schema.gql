@@ -24,7 +24,7 @@ type AuthModel {
 }
 
 type Query {
-  getUser: AuthModel!
+  getUser: UserModel!
 }
 
 type Mutation {

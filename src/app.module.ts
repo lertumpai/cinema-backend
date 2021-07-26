@@ -11,6 +11,11 @@ import { AuthModule } from './domains/auth/auth.module'
       installSubscriptionHandlers: true,
       autoSchemaFile: 'schema.gql',
       debug: false,
+      cors: {
+        credentials: true,
+        origin: true,
+      },
+      context: ({ req, res }) => ({ req, res }),
     }),
     TypeOrmModule.forRoot(),
     UserModule,
