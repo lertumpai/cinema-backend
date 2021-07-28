@@ -1,11 +1,9 @@
 import { Mutation, Query, Resolver, Context } from '@nestjs/graphql'
-import { UseGuards } from '@nestjs/common'
 
 import { UserService } from './user.service'
 import { UserModel } from './user.dto'
-import { Roles } from '../roles/role.decorator'
+import { AuthRole } from '../roles/role.decorator'
 import { Role } from '../../databases/postgres/entities/enum/role.enum'
-import { RolesGuard } from '../roles/role.guard'
 
 const mockUser = {
   id: '123',
@@ -16,8 +14,7 @@ const mockUser = {
   updatedAt: new Date(),
 }
 
-@Roles(Role.Admin)
-@UseGuards(RolesGuard)
+@AuthRole([Role.Customer, Role.Admin])
 @Resolver()
 export class UserResolver {
   constructor(
