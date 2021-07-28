@@ -8,9 +8,9 @@ import {
 } from '@nestjs/graphql'
 import { IsEnum } from 'class-validator'
 
-import { Roles } from '../../databases/postgres/entities/enum/index.enum'
+import { Role } from '../../databases/postgres/entities/enum/role.enum'
 
-registerEnumType(Roles, { name: 'Roles' })
+registerEnumType(Role, { name: 'Roles' })
 
 @ObjectType()
 export class AuthModel {
@@ -41,7 +41,7 @@ export class AuthArgs {
 
 @ArgsType()
 export class AuthRegisterArgs extends AuthArgs{
-  @Field(type => Roles, { defaultValue: Roles.Customer, nullable: true })
-  @IsEnum(Roles)
-  role?: Roles
+  @Field(type => Role, { defaultValue: Role.Customer, nullable: true })
+  @IsEnum(Role)
+  role?: Role
 }

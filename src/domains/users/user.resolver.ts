@@ -4,6 +4,9 @@ import { UseGuards } from '@nestjs/common'
 import { UserService } from './user.service'
 import { UserModel } from './user.dto'
 import { GqlAuthGuard } from '../auth/auth.guard'
+import { Roles } from '../roles/role.decorator'
+import { Role } from '../../databases/postgres/entities/enum/role.enum'
+import { RolesGuard } from '../roles/role.guard'
 
 const mockUser = {
   id: '123',
@@ -21,6 +24,8 @@ export class UserResolver {
     private userService: UserService
   ) {}
 
+  @Roles(Role.Customer)
+  @UseGuards(RolesGuard)
   @Query(returns => UserModel)
   getUser(@Context() context): UserModel {
     return mockUser

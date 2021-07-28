@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm'
 
-import { Roles } from '../entities/enum/index.enum'
+import { Role } from '../entities/enum/role.enum'
 
 export class createAuth1627198796289 implements MigrationInterface {
 
@@ -27,8 +27,8 @@ export class createAuth1627198796289 implements MigrationInterface {
           name: 'role',
           type: 'enum',
           enum: [
-            Roles.Admin,
-            Roles.Customer,
+            Role.Admin,
+            Role.Customer,
           ],
         },
         {

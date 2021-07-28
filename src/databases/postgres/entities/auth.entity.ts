@@ -5,7 +5,7 @@ import {
   BaseEntity,
 } from 'typeorm'
 
-import { Roles } from './enum/index.enum'
+import { Role } from './enum/role.enum'
 
 @Entity({ name: 'Auths' })
 export class AuthEntity extends BaseEntity {
@@ -19,7 +19,7 @@ export class AuthEntity extends BaseEntity {
   password: string
 
   @Column('text')
-  role: Roles
+  role: Role
 
   @Column()
   createdAt: Date
