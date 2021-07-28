@@ -24,7 +24,7 @@ export class UserResolver {
     private userService: UserService
   ) {}
 
-  @Roles(Role.Customer)
+  @Roles(Role.Admin)
   @UseGuards(RolesGuard)
   @Query(returns => UserModel)
   getUser(@Context() context): UserModel {
