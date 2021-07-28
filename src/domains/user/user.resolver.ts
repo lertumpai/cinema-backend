@@ -3,7 +3,7 @@ import { UseGuards } from '@nestjs/common'
 
 import { UserService } from './user.service'
 import { UserModel } from './user.dto'
-import { GqlAuthGuard } from '../auth/utils/authentication'
+import { GqlAuthGuard } from '../auth/auth.guard'
 
 const mockUser = {
   id: '123',
@@ -15,20 +15,21 @@ const mockUser = {
 }
 
 @Resolver()
+@UseGuards(GqlAuthGuard)
 export class UserResolver {
   constructor(
     private userService: UserService
   ) {}
 
-
   @Query(returns => UserModel)
-  @UseGuards(GqlAuthGuard)
-  getUser(): UserModel {
+  getUser(@Context() context): UserModel {
+    console.log(context.req.user)
     return mockUser
   }
 
-  @Mutation(returns => UserModel)
-  async register(): Promise<UserModel> {
+  @Query(returns => UserModel)
+  getUsers(@Context() context): UserModel {
+    console.log(context.req.user)
     return mockUser
   }
 }

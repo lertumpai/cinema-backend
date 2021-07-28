@@ -66,16 +66,4 @@ export class AuthService {
     const user = await this.validateUser(authArgs)
     return this.getToken(user)
   }
-
-  validateToken(token: string): any {
-    try {
-      if (!token || token.search('CINEMA')) {
-        return null
-      }
-
-      return this.jwtService.verify(token.replace('CINEMA ', ''))
-    } catch (e) {
-      return null
-    }
-  }
 }

@@ -20,6 +20,6 @@ export class AuthResolver {
     const token = await this.authService.login(authArgs)
     const { res } = context
     res.cookie('token', token, { maxAge: 3600, httpOnly: true });
-    return null
+    return true
   }
 }
