@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common'
 import { GraphQLModule } from '@nestjs/graphql'
 import { TypeOrmModule } from '@nestjs/typeorm'
 
+import { context } from './context'
 import { UserModule } from './domains/users/user.module'
 import { AuthModule } from './domains/auth/auth.module'
 
@@ -15,7 +16,7 @@ import { AuthModule } from './domains/auth/auth.module'
         credentials: true,
         origin: true,
       },
-      context: ({ req, res }) => ({ req, res }),
+      context,
     }),
     TypeOrmModule.forRoot(),
     UserModule,

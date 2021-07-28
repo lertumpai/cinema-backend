@@ -3,7 +3,6 @@ import { UseGuards } from '@nestjs/common'
 
 import { UserService } from './user.service'
 import { UserModel } from './user.dto'
-import { GqlAuthGuard } from '../auth/auth.guard'
 import { Roles } from '../roles/role.decorator'
 import { Role } from '../../databases/postgres/entities/enum/role.enum'
 import { RolesGuard } from '../roles/role.guard'
@@ -17,15 +16,14 @@ const mockUser = {
   updatedAt: new Date(),
 }
 
+@Roles(Role.Admin)
+@UseGuards(RolesGuard)
 @Resolver()
-@UseGuards(GqlAuthGuard)
 export class UserResolver {
   constructor(
     private userService: UserService
   ) {}
 
-  @Roles(Role.Admin)
-  @UseGuards(RolesGuard)
   @Query(returns => UserModel)
   getUser(@Context() context): UserModel {
     return mockUser
