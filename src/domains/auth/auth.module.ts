@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common'
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmModule } from '@nestjs/typeorm'
+import { JwtModule } from '@nestjs/jwt'
 
 import { AuthResolver } from './auth.resolver'
 import { AuthRepository } from './auth.repository'
@@ -11,6 +12,10 @@ import { AuthEntity } from '../../databases/postgres/entities/auth.entity'
     TypeOrmModule.forFeature([
       AuthEntity,
     ]),
+    JwtModule.register({
+      secret: 'secret',
+      signOptions: { expiresIn: '3600s' },
+    }),
   ],
   providers: [
     AuthResolver,
@@ -19,3 +24,5 @@ import { AuthEntity } from '../../databases/postgres/entities/auth.entity'
   ],
 })
 export class AuthModule {}
+
+

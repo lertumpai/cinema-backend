@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { UnauthorizedException } from '@nestjs/common'
+import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt'
-import * as jwt from 'jsonwebtoken'
 
 import { AuthEntity } from '../../databases/postgres/entities/auth.entity'
 import { AuthRepository } from './auth.repository'
@@ -17,7 +17,8 @@ export class AuthService {
   private readonly secret = 'secret'
 
   constructor(
-    private authRepository: AuthRepository
+    private authRepository: AuthRepository,
+    private jwtService: JwtService,
   ) {}
 
   async register(authRegisterArgs: AuthRegisterArgs): Promise<AuthEntity> {
@@ -58,7 +59,7 @@ export class AuthService {
       role: user.role,
     }
 
-    return jwt.sign(payload, this.secret, { expiresIn: 3600 })
+    return this.jwtService.sign(payload)
   }
 
   async login(authArgs: AuthArgs): Promise<string> {
@@ -72,7 +73,7 @@ export class AuthService {
         return null
       }
 
-      return jwt.verify(token.replace('CINEMA ', ''), this.secret)
+      return this.jwtService.verify(token.replace('CINEMA ', ''))
     } catch (e) {
       return null
     }

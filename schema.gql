@@ -29,6 +29,7 @@ type Query {
 
 type Mutation {
   register(username: String!, password: String!, role: Roles = Customer): AuthModel!
+  login(username: String!, password: String!, role: Roles = Customer): Boolean!
 }
 
 enum Roles {
