@@ -23,13 +23,6 @@ export class UserResolver {
 
   @Query(returns => UserModel)
   getUser(@Context() context): UserModel {
-    console.log(context.req.user)
-    return mockUser
-  }
-
-  @Query(returns => UserModel)
-  getUsers(@Context() context): UserModel {
-    console.log(context.req.user)
     return mockUser
   }
 }
